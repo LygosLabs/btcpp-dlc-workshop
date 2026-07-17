@@ -17,7 +17,7 @@ Both are **enumerated-outcome DLCs**: a handful of outcomes, one adaptor signatu
 
 ## Run it
 
-**Hosted (workshop mode):** open the deployed app — no setup needed. Each browser generates its own throwaway testnet4 wallets in localStorage.
+**Hosted (workshop mode):** open **[btcpp-dlc-workshop.vercel.app](https://btcpp-dlc-workshop.vercel.app)** — no setup needed. Each browser generates its own throwaway testnet4 wallets in localStorage.
 
 **Local:**
 

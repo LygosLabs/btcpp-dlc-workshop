@@ -4,6 +4,8 @@ Everything you need to run this workshop start to finish. You don't need to be a
 
 **Session shape:** 90 minutes. Intro talk (10) → setup & funding (10) → betting demo (30) → lending demo (20) → on-chain review + Q&A (20).
 
+**The app:** https://btcpp-dlc-workshop.vercel.app
+
 ---
 
 ## T-1 day checklist
