@@ -1,0 +1,40 @@
+diff --git a/dist/BitcoinDdkProvider.js b/dist/BitcoinDdkProvider.js
+index cb64200401b914728ebc628ff0d69b91983424d9..5605538ad665aa8dddf2a83e53e77c81c6080b9f 100644
+--- a/dist/BitcoinDdkProvider.js
++++ b/dist/BitcoinDdkProvider.js
+@@ -1,4 +1,9 @@
+ "use strict";
++// patch: deserialized messages split the 162-byte adaptor sig into encryptedSig(65)+dleqProof(97);
++// live objects carry all 162 bytes in encryptedSig. ddk signCet needs the full 162.
++const fullAdaptorSig = (sig) => sig.dleqProof && sig.dleqProof.length
++    ? Buffer.concat([sig.encryptedSig, sig.dleqProof])
++    : sig.encryptedSig;
+ var __importDefault = (this && this.__importDefault) || function (mod) {
+     return (mod && mod.__esModule) ? mod : { "default": mod };
+ };
+@@ -1551,9 +1556,9 @@ Payout Group not found even with brute force search');
+                 return outcome.outcome === attestedOutcomeHash;
+             });
+             finalCet = this._ddk
+-                .signCet(this.convertTxToDdkTransaction(dlcTxs.cets[outcomeIndex]), isOfferer
+-                ? dlcAccept.cetAdaptorSignatures.sigs[outcomeIndex].encryptedSig
+-                : dlcSign.cetAdaptorSignatures.sigs[outcomeIndex].encryptedSig, oracleAttestation.signatures, Buffer.from(fundPrivateKey, 'hex'), isOfferer ? dlcAccept.fundingPubkey : dlcOffer.fundingPubkey, isOfferer ? dlcOffer.fundingPubkey : dlcAccept.fundingPubkey, this.getFundOutputValueSats(dlcTxs))
++                .signCet(this.convertTxToDdkTransaction(dlcTxs.cets[outcomeIndex]), fullAdaptorSig(isOfferer
++                ? dlcAccept.cetAdaptorSignatures.sigs[outcomeIndex]
++                : dlcSign.cetAdaptorSignatures.sigs[outcomeIndex]), oracleAttestation.signatures, Buffer.from(fundPrivateKey, 'hex'), isOfferer ? dlcAccept.fundingPubkey : dlcOffer.fundingPubkey, isOfferer ? dlcOffer.fundingPubkey : dlcAccept.fundingPubkey, this.getFundOutputValueSats(dlcTxs))
+                 .rawBytes.toString('hex');
+         }
+         else {
+@@ -1563,9 +1568,9 @@ Payout Group not found even with brute force search');
+                 ? oracleAttestation.signatures
+                 : oracleAttestation.signatures.slice(0, sliceIndex);
+             finalCet = this._ddk
+-                .signCet(this.convertTxToDdkTransaction(dlcTxs.cets[outcomeIndex]), isOfferer
+-                ? dlcAccept.cetAdaptorSignatures.sigs[outcomeIndex].encryptedSig
+-                : dlcSign.cetAdaptorSignatures.sigs[outcomeIndex].encryptedSig, oracleSignatures, Buffer.from(fundPrivateKey, 'hex'), isOfferer ? dlcAccept.fundingPubkey : dlcOffer.fundingPubkey, isOfferer ? dlcOffer.fundingPubkey : dlcAccept.fundingPubkey, this.getFundOutputValueSats(dlcTxs))
++                .signCet(this.convertTxToDdkTransaction(dlcTxs.cets[outcomeIndex]), fullAdaptorSig(isOfferer
++                ? dlcAccept.cetAdaptorSignatures.sigs[outcomeIndex]
++                : dlcSign.cetAdaptorSignatures.sigs[outcomeIndex]), oracleSignatures, Buffer.from(fundPrivateKey, 'hex'), isOfferer ? dlcAccept.fundingPubkey : dlcOffer.fundingPubkey, isOfferer ? dlcOffer.fundingPubkey : dlcAccept.fundingPubkey, this.getFundOutputValueSats(dlcTxs))
+                 .rawBytes.toString('hex');
+         }
+         // const finalCet = (await this.SignCet(signCetRequest)).hex;

@@ -32,18 +32,29 @@ export async function esplora(path: string): Promise<any> {
 }
 
 export interface WalletInfo {
+  /** external address 0 — the one attendees fund */
   address: string;
-  derivationPath: string;
-  balance: number; // sats on address 0
+  balance: number; // sats across external 0 + change 0
+  /** utxos annotated with their owning address + derivation path */
   utxos: any[];
 }
 
 export async function getWalletInfo(client: Awaited<ReturnType<typeof buildBrowserClient>>): Promise<WalletInfo> {
-  const addr = (await client.wallet.getAddresses(0, 1, false))[0];
-  const address = String(addr.address);
-  const utxos = await esplora(`/address/${address}/utxo`);
+  // external 0 receives funding; payouts land on external 0-1 and change on
+  // change 0-1 (the address provider walks indexes) — scan the first two of
+  // each so back-to-back demos work without re-funding.
+  const [ext, chg] = await Promise.all([
+    client.wallet.getAddresses(0, 2, false),
+    client.wallet.getAddresses(0, 2, true),
+  ]);
+  const utxos: any[] = [];
+  for (const addr of [...ext, ...chg]) {
+    const found = await esplora(`/address/${String(addr.address)}/utxo`);
+    for (const u of found)
+      utxos.push({ ...u, address: String(addr.address), derivationPath: addr.derivationPath });
+  }
   const balance = utxos.reduce((s: number, u: any) => s + u.value, 0);
-  return { address, derivationPath: addr.derivationPath ?? '', balance, utxos };
+  return { address: String(ext[0].address), balance, utxos };
 }
 
 export async function getFundingInputs(info: WalletInfo): Promise<Input[]> {
@@ -53,10 +64,10 @@ export async function getFundingInputs(info: WalletInfo): Promise<Input[]> {
       return new Input(
         utxo.txid,
         utxo.vout,
-        info.address,
+        utxo.address,
         utxo.value / 1e8,
         utxo.value,
-        info.derivationPath,
+        utxo.derivationPath,
         108, // maxWitnessLength for p2wpkh
         '',
         undefined,

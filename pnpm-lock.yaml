@@ -12,26 +12,35 @@ overrides:
   '@node-dlc/crypto': 1.2.1
   '@node-dlc/common': 1.2.1
   '@bennyblader/ddk-ts': file:vendor/ddk-ts
+  '@atomicfinance/types': 4.3.3
+
+patchedDependencies:
+  '@atomicfinance/bitcoin-ddk-provider@4.3.3':
+    hash: a26f4ee0be82d458c987a5e6712ea6e3774f49f1b3d96fa709ecbf3b1352f9b1
+    path: patches/@atomicfinance__bitcoin-ddk-provider@4.3.3.patch
 
 importers:
 
   .:
     dependencies:
       '@atomicfinance/bitcoin-ddk-provider':
-        specifier: 4.3.2
-        version: 4.3.2
+        specifier: 4.3.3
+        version: 4.3.3(patch_hash=a26f4ee0be82d458c987a5e6712ea6e3774f49f1b3d96fa709ecbf3b1352f9b1)
       '@atomicfinance/bitcoin-esplora-api-provider':
-        specifier: 4.3.2
-        version: 4.3.2(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)
+        specifier: 4.3.3
+        version: 4.3.3(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)
       '@atomicfinance/bitcoin-js-wallet-provider':
-        specifier: 4.3.2
-        version: 4.3.2
+        specifier: 4.3.3
+        version: 4.3.3
       '@atomicfinance/client':
-        specifier: 4.3.2
-        version: 4.3.2(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)
+        specifier: 4.3.3
+        version: 4.3.3(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)
+      '@atomicfinance/provider':
+        specifier: 4.3.3
+        version: 4.3.3
       '@atomicfinance/types':
-        specifier: 4.3.2
-        version: 4.3.2
+        specifier: 4.3.3
+        version: 4.3.3
       '@bennyblader/ddk-ts':
         specifier: file:vendor/ddk-ts
         version: file:vendor/ddk-ts(@emnapi/core@1.11.2)(@emnapi/runtime@1.11.2)
@@ -100,19 +109,15 @@ packages:
     resolution: {integrity: sha512-UrcABB+4bUrFABwbluTIBErXwvbsU/V7TZWfmbgJfbkwiBuziS9gxdODUyuiecfdGQ85jglMW6juS3+z5TsKLw==}
     engines: {node: '>=10'}
 
-  '@atomicfinance/bitcoin-ddk-provider@4.3.2':
-    resolution: {integrity: sha512-IPqQB15Mtwicvq47mwrG/F4PxNalAkAwYx7IiQfFF1+fSM7fz0Bt4+juhLQCaVWT4slrUCOhE10S2pDm3xPq6Q==}
+  '@atomicfinance/bitcoin-ddk-provider@4.3.3':
+    resolution: {integrity: sha512-dbVjG/n9xl7KVhMTSqjHEEBSC+QOl0WH0V6eKS3z0R3rN3ujMRGFRsAEKMqwS7c64BJrDa6Fcg5s5sCy0wkU+g==}
 
-  '@atomicfinance/bitcoin-esplora-api-provider@4.3.2':
-    resolution: {integrity: sha512-NIPOdpxwuWaVKlntG6yyX+EjOH05kasgDEj6gUlgpn3Nin6/7s4hj5s9+VlQ5wNVOt4knso3UavWcQk8pFTqWg==}
+  '@atomicfinance/bitcoin-esplora-api-provider@4.3.3':
+    resolution: {integrity: sha512-xuHnFNCtKqtHgctu2QrAhGTa5xB61APRUWcEZmiD55uiex8ewDfQdZSkUQM/wx16Qz0erhkcKUFqlEOXzj1jTA==}
     engines: {node: '>=14'}
 
-  '@atomicfinance/bitcoin-js-wallet-provider@4.3.2':
-    resolution: {integrity: sha512-DqIn740Xbp0tBY/1ZAvzVZ1CXMdaum6wrVx8GV/eddCYWOCl3JHR2mY4C6FwgSM1iX7txwBK1vpbNShbP/xuhA==}
-    engines: {node: '>=14'}
-
-  '@atomicfinance/bitcoin-utils@4.3.2':
-    resolution: {integrity: sha512-ZGgh1HacOFKNRcOFy/EUQDbJYLJGSDzZTUAaSof2rW1tQVWdJBCvP9YjGV6xo0P5gjmsYfl77RgwmKAhtlKLRA==}
+  '@atomicfinance/bitcoin-js-wallet-provider@4.3.3':
+    resolution: {integrity: sha512-KGfqmkEjv90+2sGsxcP0Ppkl7KBBk4e40+FykkOLqj/3yZjdydrHSqh+eMoZQoSm79q89O3/8/YqHlG6lazGxQ==}
     engines: {node: '>=14'}
 
   '@atomicfinance/bitcoin-utils@4.3.3':
@@ -122,8 +127,8 @@ packages:
   '@atomicfinance/bitcoin-wallet-provider@4.3.3':
     resolution: {integrity: sha512-1arNmLA/7EdA0yHbq8I+mrBDrcVAb2maRlIPsM/823dvvp7LPCtGljeUOnl1CJqnsPAuD5U3Z2paMFwKbskGjw==}
 
-  '@atomicfinance/client@4.3.2':
-    resolution: {integrity: sha512-al3gbgbcUDMLPrsQxUekGxtYnUG+Q1qfoYnfbvO092BlqBylYvccBWtyg2CJTbfnu9aXZcJlhSmQ5z67cGTEUQ==}
+  '@atomicfinance/client@4.3.3':
+    resolution: {integrity: sha512-kLqLjdzvQqvL1iyHv0UaDS4jml2Mjd4tiZb5GN0JbmBy8npGcA1iEOEKxyEd/lrluKji1JLQxtyvOxavw8kFDg==}
 
   '@atomicfinance/crypto@4.3.3':
     resolution: {integrity: sha512-r+81pGHBJXqr1XI5v1MFxJZ0np0w5WP4f25QSbSnjpuc9MYbxfivw1QL9KxQgqLs6QfdS46Vq5MUrOPAgMb20w==}
@@ -139,9 +144,6 @@ packages:
 
   '@atomicfinance/provider@4.3.3':
     resolution: {integrity: sha512-ao9jU/LeR+9IGHA0RKZb2bK+QHZo+UVEnVzicfkGcb+ol61vbg5Yn9FeRSeHPOS5ghLMJIYTzxB9KvYRU1TWQg==}
-
-  '@atomicfinance/types@4.3.2':
-    resolution: {integrity: sha512-f15VG6VzUQh3wUtUFoKTjv0hlCHi7+cDYE9fyINnpKmmnORBAbgl4APGR0v/AsX0/ksN8DhEF1BKR/QHSxI18w==}
 
   '@atomicfinance/types@4.3.3':
     resolution: {integrity: sha512-AzBIOT3t45769CVRTXuaHIWvFinUY8nVkzijzqxIYSysHox0rqFZEHmol1SIZ+RbVPUSYVl6xM0G9FC8NUp5Pw==}
@@ -596,9 +598,6 @@ packages:
 
   '@node-dlc/messaging@1.2.1':
     resolution: {integrity: sha512-vG1RrpWmsXf9y5BWOMgRE2Mr5P5KIZ6BSvAAol5LmjpOAIWNkUgbaSZXB3yUBjXmTUc+DBHEwWJxXLQqRENH5g==}
-
-  '@node-dlc/noise@1.2.0':
-    resolution: {integrity: sha512-hcN708qe7N8sAFUDjVJUpnpBwprVwtclLLTHRlde74iKZRgH566XlMsH5EcF/khuro6iXWXw1Kt6JZMdi8DIOQ==}
 
   '@node-dlc/noise@1.2.1':
     resolution: {integrity: sha512-GnKdWrefDEsHNLxGRvdYN+bTwVgL5XrUeIyQ3zlkBp3aqEgiJxiAdHv5jHqHh7mcTDSasndwgSS1oTGhjY9FnA==}
@@ -1464,11 +1463,11 @@ snapshots:
 
   '@alloc/quick-lru@5.2.0': {}
 
-  '@atomicfinance/bitcoin-ddk-provider@4.3.2':
+  '@atomicfinance/bitcoin-ddk-provider@4.3.3(patch_hash=a26f4ee0be82d458c987a5e6712ea6e3774f49f1b3d96fa709ecbf3b1352f9b1)':
     dependencies:
-      '@atomicfinance/bitcoin-utils': 4.3.2(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)
+      '@atomicfinance/bitcoin-utils': 4.3.3(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)
       '@atomicfinance/provider': 4.3.3
-      '@atomicfinance/types': 4.3.2
+      '@atomicfinance/types': 4.3.3
       '@atomicfinance/utils': 4.3.3(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)
       '@bitcoin-js/tiny-secp256k1-asmjs': 2.2.4
       bignumber.js: 9.3.1
@@ -1477,13 +1476,13 @@ snapshots:
       bitcoinjs-lib: 6.1.7
       ecpair: 2.1.0
 
-  '@atomicfinance/bitcoin-esplora-api-provider@4.3.2(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)':
+  '@atomicfinance/bitcoin-esplora-api-provider@4.3.3(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)':
     dependencies:
       '@atomicfinance/bitcoin-utils': 4.3.3(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)
       '@atomicfinance/crypto': 4.3.3
       '@atomicfinance/errors': 4.3.3
       '@atomicfinance/node-provider': 4.3.3
-      '@atomicfinance/types': 4.3.2
+      '@atomicfinance/types': 4.3.3
       '@atomicfinance/utils': 4.3.3(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)
       '@babel/runtime': 7.29.7
       bignumber.js: 9.3.1
@@ -1494,12 +1493,12 @@ snapshots:
       - debug
       - ecpair
 
-  '@atomicfinance/bitcoin-js-wallet-provider@4.3.2':
+  '@atomicfinance/bitcoin-js-wallet-provider@4.3.3':
     dependencies:
       '@atomicfinance/bitcoin-utils': 4.3.3(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)
       '@atomicfinance/bitcoin-wallet-provider': 4.3.3(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)
       '@atomicfinance/provider': 4.3.3
-      '@atomicfinance/types': 4.3.2
+      '@atomicfinance/types': 4.3.3
       '@atomicfinance/utils': 4.3.3(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)
       '@babel/runtime': 7.29.7
       '@bitcoin-js/tiny-secp256k1-asmjs': 2.2.4
@@ -1510,23 +1509,6 @@ snapshots:
       bitcoinjs-lib: 6.1.7
       bitcoinjs-message: 2.2.0
       ecpair: 2.1.0
-
-  '@atomicfinance/bitcoin-utils@4.3.2(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)':
-    dependencies:
-      '@atomicfinance/crypto': 4.3.3
-      '@atomicfinance/errors': 4.3.3
-      '@atomicfinance/types': 4.3.2
-      '@atomicfinance/utils': 4.3.3(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)
-      '@babel/runtime': 7.29.7
-      bignumber.js: 9.3.1
-      bip174: 2.1.1
-      bitcoin-network: 0.1.0
-      bitcoinjs-lib: 6.1.7
-      coinselect: 3.1.13
-      lodash: 4.18.1
-    transitivePeerDependencies:
-      - '@bitcoin-js/tiny-secp256k1-asmjs'
-      - ecpair
 
   '@atomicfinance/bitcoin-utils@4.3.3(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)':
     dependencies:
@@ -1562,12 +1544,12 @@ snapshots:
       - '@bitcoin-js/tiny-secp256k1-asmjs'
       - ecpair
 
-  '@atomicfinance/client@4.3.2(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)':
+  '@atomicfinance/client@4.3.3(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)':
     dependencies:
       '@atomicfinance/bitcoin-utils': 4.3.3(@bitcoin-js/tiny-secp256k1-asmjs@2.2.4)(ecpair@2.1.0)
       '@atomicfinance/errors': 4.3.3
       '@atomicfinance/provider': 4.3.3
-      '@atomicfinance/types': 4.3.2
+      '@atomicfinance/types': 4.3.3
       '@node-dlc/bitcoin': 1.2.1
       '@node-dlc/messaging': 1.2.1
       ajv: 6.15.0
@@ -1598,13 +1580,6 @@ snapshots:
   '@atomicfinance/provider@4.3.3':
     dependencies:
       '@atomicfinance/types': 4.3.3
-      lodash: 4.18.1
-
-  '@atomicfinance/types@4.3.2':
-    dependencies:
-      '@node-dlc/bitcoin': 1.2.1
-      '@node-dlc/messaging': 1.2.1
-      '@node-dlc/noise': 1.2.0
       lodash: 4.18.1
 
   '@atomicfinance/types@4.3.3':
@@ -1937,11 +1912,6 @@ snapshots:
       decimal.js: 10.6.0
       json-bigint: 1.0.0
       secp256k1: 5.0.1
-
-  '@node-dlc/noise@1.2.0':
-    dependencies:
-      '@node-dlc/crypto': 1.2.1
-      '@node-dlc/logger': 1.2.1
 
   '@node-dlc/noise@1.2.1':
     dependencies:

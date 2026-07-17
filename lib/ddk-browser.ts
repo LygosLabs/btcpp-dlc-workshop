@@ -6,6 +6,12 @@
 let ddkPromise: Promise<typeof import('@bennyblader/ddk-ts')> | null = null;
 
 export function getDdk() {
-  if (!ddkPromise) ddkPromise = import('@bennyblader/ddk-ts');
+  if (!ddkPromise)
+    ddkPromise = import('@bennyblader/ddk-ts').then((mod) => {
+      // spread: module namespaces are frozen; a plain object lets tests wrap fns
+      const ddk = { ...mod };
+      (globalThis as { __ddk?: unknown }).__ddk = ddk;
+      return ddk;
+    });
   return ddkPromise;
 }
