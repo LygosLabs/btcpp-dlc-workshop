@@ -1,0 +1,52 @@
+{
+  "name": "btcpp-dlc-workshop",
+  "version": "0.1.0",
+  "private": true,
+  "description": "btc++ Toronto 2026 workshop: Building Bitcoin-Native Applications with Discreet Log Contracts",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "spike": "tsx scripts/spike-e2e.ts"
+  },
+  "dependencies": {
+    "@atomicfinance/bitcoin-ddk-provider": "4.3.2",
+    "@atomicfinance/bitcoin-esplora-api-provider": "4.3.2",
+    "@atomicfinance/bitcoin-js-wallet-provider": "4.3.2",
+    "@atomicfinance/client": "4.3.2",
+    "@atomicfinance/types": "4.3.2",
+    "@bennyblader/ddk-ts": "file:vendor/ddk-ts",
+    "@noble/curves": "^1.6.0",
+    "@node-dlc/bitcoin": "1.2.1",
+    "@node-dlc/core": "1.2.1",
+    "@node-dlc/messaging": "1.2.1",
+    "bip-schnorr": "^0.6.7",
+    "bip39": "^3.1.0",
+    "bitcoin-network": "^0.2.0",
+    "buffer": "^6.0.3",
+    "next": "^15.5.0",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^20.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "puppeteer-core": "^25.3.0",
+    "tailwindcss": "^4.0.0",
+    "tsx": "^4.20.0",
+    "typescript": "^5.8.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "@node-dlc/bitcoin": "1.2.1",
+      "@node-dlc/core": "1.2.1",
+      "@node-dlc/messaging": "1.2.1",
+      "@node-dlc/bufio": "1.2.1",
+      "@node-dlc/crypto": "1.2.1",
+      "@node-dlc/common": "1.2.1",
+      "@bennyblader/ddk-ts": "file:vendor/ddk-ts"
+    }
+  }
+}
