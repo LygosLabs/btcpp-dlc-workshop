@@ -14,7 +14,7 @@ const BASE = process.env.BASE_URL ?? 'http://localhost:3000';
 async function main() {
   const browser = await puppeteer.launch({ executablePath: CHROME, headless: true });
   const page = await browser.newPage();
-  page.on('pageerror', (e) => console.error('PAGE ERROR:', e.message));
+  page.on('pageerror', (e) => console.error('PAGE ERROR:', String(e)));
 
   await page.goto(`${BASE}/oracle?demo=bet`, { waitUntil: 'networkidle0' });
 

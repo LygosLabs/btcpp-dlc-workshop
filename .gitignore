@@ -145,3 +145,5 @@ vite.config.ts.timestamp-*
 # workshop specifics
 .claude/
 !vendor/ddk-ts/dist
+.vercel
+.env*
