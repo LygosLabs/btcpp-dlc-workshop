@@ -13,8 +13,8 @@ Questions developers ask when they go from clicking through the workshop to buil
 **Why does DLC signing happen in Rust/wasm instead of JS?**
 The adaptor-signature and CET-construction logic lives in rust-dlc/`ddk`, which is the battle-tested implementation. Rather than reimplement it in JS, `BitcoinDdkProvider` calls the Rust engine through bindings — natively in Node, as wasm in the browser. Same code, both places.
 
-**Can I use the published packages instead of the vendored `vendor/ddk-ts`?**
-Yes — `@bennyblader/ddk-ts@0.3.43+` ships the wasm target on npm (the vendored copy predates that release). Native Node use needs nothing special; browser use needs the COOP/COEP headers below.
+**Is the wasm build on npm?**
+Yes — `@bennyblader/ddk-ts@0.3.43+` ships the wasm target via the `@bennyblader/ddk-ts-wasm32-wasi` optional dependency (this repo uses it directly; pnpm needs the `supportedArchitectures.cpu: ["wasm32"]` hint in `package.json`). Native Node use needs nothing special; browser use needs the COOP/COEP headers below.
 
 ## Working with messages
 
