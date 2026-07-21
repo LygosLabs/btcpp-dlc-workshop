@@ -16,7 +16,7 @@
     "@atomicfinance/client": "4.3.3",
     "@atomicfinance/provider": "4.3.3",
     "@atomicfinance/types": "4.3.3",
-    "@bennyblader/ddk-ts": "file:vendor/ddk-ts",
+    "@bennyblader/ddk-ts": "0.3.43",
     "@noble/curves": "^1.6.0",
     "@node-dlc/bitcoin": "1.2.1",
     "@node-dlc/core": "1.2.1",
@@ -47,8 +47,12 @@
       "@node-dlc/bufio": "1.2.1",
       "@node-dlc/crypto": "1.2.1",
       "@node-dlc/common": "1.2.1",
-      "@bennyblader/ddk-ts": "file:vendor/ddk-ts",
       "@atomicfinance/types": "4.3.3"
+    },
+    "supportedArchitectures": {
+      "cpu": [
+        "wasm32"
+      ]
     },
     "patchedDependencies": {
       "@atomicfinance/bitcoin-ddk-provider@4.3.3": "patches/@atomicfinance__bitcoin-ddk-provider@4.3.3.patch"

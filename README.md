@@ -54,7 +54,7 @@ Running the session? Read [docs/RUNBOOK.md](docs/RUNBOOK.md) first, then [docs/Q
 
 - [bitcoin-abstraction-layer](https://github.com/AtomicFinance/bitcoin-abstraction-layer) (BAL) 4.3.2 — wallet + DLC client (`BitcoinDdkProvider`)
 - [node-dlc](https://github.com/AtomicFinance/node-dlc) 1.2.x — DLC protocol messages (offer/accept/sign, announcements, attestations)
-- [ddk-ffi](https://github.com/bennyhodl/ddk-ffi) / [dlcdevkit](https://github.com/bennyhodl/dlcdevkit) — Rust DLC transaction engine, compiled to `wasm32-wasip1-threads` so it runs in the browser (`vendor/ddk-ts`)
+- [ddk-ffi](https://github.com/bennyhodl/ddk-ffi) / [dlcdevkit](https://github.com/bennyhodl/dlcdevkit) — Rust DLC transaction engine, compiled to `wasm32-wasip1-threads` so it runs in the browser (published as [`@bennyblader/ddk-ts`](https://www.npmjs.com/package/@bennyblader/ddk-ts))
 - Oracle: ~100 lines of pure JS ([lib/oracle.ts](lib/oracle.ts)) — BIP340 signing with a committed nonce
 - Chain data: [mempool.space/testnet4](https://mempool.space/testnet4) esplora API
 
@@ -73,5 +73,7 @@ app/            Next.js pages: /, /oracle, /offerer, /accepter
 lib/            oracle, contract builders, BAL client setup, wallet helpers
 docs/           tutorials, presenter runbook, Q&A
 scripts/        spike-e2e.ts (Node end-to-end on testnet4), browser tests
-vendor/ddk-ts/  vendored ddk-ts build with the wasm32-wasip1-threads artifact
 ```
+
+The browser wasm ships in the `@bennyblader/ddk-ts-wasm32-wasi` optional dependency; pnpm
+installs it via the `pnpm.supportedArchitectures.cpu: ["wasm32"]` hint in `package.json`.
