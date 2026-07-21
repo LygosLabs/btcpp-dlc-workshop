@@ -181,10 +181,7 @@ pnpm exec tsx scripts/spike-e2e.ts`}</Code>
         <h2 className="text-2xl font-semibold">Keep going</h2>
         <ul className="text-zinc-400 space-y-2 list-disc list-inside">
           <li>
-            <a
-              href="https://github.com/LygosLabs/btcpp-dlc-workshop/blob/master/docs/FAQ.md"
-              className="text-orange-400 hover:underline"
-            >
+            <a href="/faq" className="text-orange-400 hover:underline">
               Developer FAQ
             </a>{' '}
             — the sharp edges we hit building this (and how to avoid them)
