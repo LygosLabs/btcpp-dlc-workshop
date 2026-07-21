@@ -2,7 +2,7 @@
 
 Everything you need to run this workshop start to finish. You don't need to be a DLC expert: the talking points are written out, the demo drives itself, and [QUESTIONS.md](QUESTIONS.md) has answers to everything attendees usually ask. Read this doc fully once the day before.
 
-**Session shape:** 90 minutes. Intro talk (10) → setup & funding (10) → betting demo (30) → lending demo (20) → on-chain review + Q&A (20).
+**Session shape:** 45 minutes. Intro talk (8) → setup & funding (7) → betting demo (18) → lending demo (7) → wrap-up + Q&A (5). It's tight — the two things that make it work: **start funding attendees before you even start talking** (see T-30), and run the lending demo presenter-led on the projector rather than waiting for the room.
 
 **The app:** https://btcpp-dlc-workshop.vercel.app
 
@@ -24,14 +24,17 @@ Everything you need to run this workshop start to finish. You don't need to be a
 - [ ] In a **second browser profile**, keep your completed run from yesterday open — if live demo gods misbehave, you can show the finished state instantly.
 - [ ] Have your funding wallet open and unlocked, ready to send sats to attendee addresses.
 - [ ] Open **[/slides](https://btcpp-dlc-workshop.vercel.app/slides)** full-screen in its own window — the intro talk and the big-URL slide live there. Arrow keys navigate; press **N** to see per-slide presenter notes.
+- [ ] **Start funding early.** As people settle in, put the app URL on screen (last slide) and ask them to open it, open the Offerer + Accepter tabs, and drop both addresses in the room chat. Send ~60k sats to each address *while you give the intro talk* — funding is the only slow part of the whole session, and this buys back 5+ minutes.
 
 ---
 
-## 0:00–0:10 — Intro talk
+## 0:00–0:08 — Intro talk
 
-Present from **[/slides](https://btcpp-dlc-workshop.vercel.app/slides)** — 10 slides matching the talking points below, ending on the big-URL slide. Press **N** for word-for-word presenter notes on each slide; rehearse with them, then present with notes off if you're comfortable. The last slide stays up while the room loads the app, then you switch to the app and drive from there.
+Present from **[/slides](https://btcpp-dlc-workshop.vercel.app/slides)** — 12 slides matching the talking points below, ending on the big-URL slide. Press **N** for word-for-word presenter notes on each slide; rehearse with them, then present with notes off if you're comfortable. The last slide stays up while the room loads the app, then you switch to the app and drive from there.
 
-Talking points (say it in your own words; each bullet is ~1 minute):
+**Pace: ~8 minutes total — keep each slide to ~30–40 seconds.** The notes are complete sentences; you don't need to say all of them. If you're running long, the compressible slides are "If things go wrong" and "Don't trust, verify" (one line each — you'll demo the verify moment live anyway).
+
+Talking points (say it in your own words):
 
 - **The problem.** Bitcoin script can't say "pay whoever won the World Cup" — it doesn't know about the outside world. Any contract about real-world events needs someone to bring the truth on-chain. The naive way: give a middleman your money and trust them. The DLC way: nobody holds your money, ever.
 - **What a DLC is.** Two parties lock funds in a 2-of-2 multisig. Before locking anything, they pre-sign one settlement transaction per possible outcome. The trick: those signatures are *encrypted* ("adaptor signatures") such that only an oracle's future signature on the actual outcome can decrypt the matching one.
@@ -40,18 +43,20 @@ Talking points (say it in your own words; each bullet is ~1 minute):
 - **Why you should care.** This is live tech: Atomic Finance ran options on it, Lygos runs Bitcoin-collateralized lending on it today. Demo 2 is literally the production loan contract.
 - **Today.** "You'll each play all three roles — oracle, and both bettors — in three browser tabs, on testnet4, with real transactions you can watch confirm."
 
-## 0:10–0:20 — Setup & funding
+## 0:08–0:15 — Setup & funding
+
+If you started funding pre-session (do!), this section is just mop-up:
 
 1. Everyone opens the app URL → home page. Confirm they see "✓ DLC engine loaded". *(If someone's stuck loading: use Chrome, hard-refresh.)*
 2. Everyone opens the three tabs (Oracle / Offerer / Accepter, bet demo).
-3. **Funding round:** attendees paste their two addresses into the room chat (or come show you); you send **~60k sats to each address** from the funding wallet. Start this early — it's the slowest part. Faucet as backup: mempool.space/testnet4/faucet.
-4. While sats propagate: walk through the home page diagram — who sends what to whom.
+3. **Funding mop-up:** anyone who didn't get sats yet pastes their two addresses into the room chat; send **~60k sats to each address** from the funding wallet. Faucet as backup: mempool.space/testnet4/faucet.
+4. While the last sats propagate: walk through the home page diagram — who sends what to whom.
 
-> Checkpoint before moving on: **"Raise your hand if both your wallets show a balance."** Help stragglers; pair anyone unfunded with a neighbor.
+> Checkpoint before moving on: **"Raise your hand if both your wallets show a balance."** Don't hold the room for stragglers — pair anyone unfunded with a neighbor and keep moving; they can run it solo after.
 
-## 0:20–0:50 — Betting demo
+## 0:15–0:33 — Betting demo
 
-Drive it live on the projector; attendees follow [tutorial-betting.md](tutorial-betting.md). Per step: do it, say the one-liner, checkpoint the room.
+Drive it live on the projector; attendees follow [tutorial-betting.md](tutorial-betting.md). Per step: do it, say the one-liner, keep moving. **At 18 minutes you can't checkpoint the room on every step** — full-room checkpoints only at Accept, Finalize (the funding tx), and Execute (the CET); for the rest, whoever falls behind catches up from the tutorial.
 
 | Step | What you do | The one-liner to say | Checkpoint |
 |---|---|---|---|
@@ -66,9 +71,9 @@ Drive it live on the projector; attendees follow [tutorial-betting.md](tutorial-
 
 Common per-step failures → see troubleshooting table below.
 
-## 0:50–1:10 — Lending demo
+## 0:33–0:40 — Lending demo
 
-Switch all three tabs to `?demo=loan` (links on the home page). Same mechanics, so go faster — the value here is the narrative:
+Switch your three tabs to `?demo=loan` (links on the home page) and **drive it yourself on the projector** — at 7 minutes this is presenter-led; attendees watch (or follow along if they kept pace, and can run it themselves after from [tutorial-lending.md](tutorial-lending.md)). Same mechanics as the bet, so move fast — the value here is the narrative:
 
 - "Same machine, different payout table. Four outcomes is all a loan needs." Show the four outcomes on the offerer page.
 - "This is not a demo version of Lygos — this *is* the Lygos contract." Mention: numeric curves = 1000+ sigs and 2 minutes; this = 4 sigs and 5 seconds; that's why it works on hardware wallets.
@@ -76,7 +81,7 @@ Switch all three tabs to `?demo=loan` (links on the home page). Same mechanics, 
 - Attest **`repaid`** → collateral returns to the borrower. Point at the CET on the explorer.
 - Close with the trust story: "After funding, there is no action Lygos, the lender, or the oracle can take that sends this Bitcoin anywhere but these four places. And if everyone vanishes, the timelock refund fires."
 
-## 1:10–1:30 — Wrap-up + Q&A
+## 0:40–0:45 — Wrap-up + Q&A
 
 - On mempool.space, click through the whole chain: funding tx → CET. "Notice it looks like any 2-of-2 multisig — DLCs are invisible on-chain. Privacy by construction."
 - Where to go next: this repo (it's open source), [dlcspecs](https://github.com/discreetlogcontracts/dlcspecs), [dlcdevkit](https://github.com/bennyhodl/dlcdevkit) for Rust folks, [lygos.finance](https://lygos.finance) to see it in production.

@@ -33,8 +33,8 @@ const SLIDES: Slide[] = [
     ),
     notes: [
       'Welcome everyone. Today you will build and settle real Bitcoin smart contracts — in your browser, no installs.',
-      'By the end you will have placed an oracle-settled bet and closed a Bitcoin-collateralized loan, both on testnet4, both visible on a block explorer.',
-      'Quick ~10 minutes of theory first so the demo makes sense, then we go hands-on.',
+      'By the end you will have placed an oracle-settled bet and seen a Bitcoin-collateralized loan settle, both on testnet4, both visible on a block explorer.',
+      'It is a 45-minute session, so: ~8 minutes of theory, then hands-on. If you have not dropped your two addresses in the chat yet, do it now — sats are on the way.',
     ],
   },
   {
@@ -254,8 +254,8 @@ offer.serialize().toString('hex');  // byte-identical round-trip`)}
     ),
     notes: [
       'Format: everyone plays all three roles in three tabs of one browser. The messages move between tabs as hex — exactly what real peers exchange over the wire.',
-      'First the bet, step by step and slow. Then the loan, faster, because it is the same machine with a different payout table.',
-      'Wallets are generated in your browser and funded with testnet4 sats — I will send sats to your addresses in a moment.',
+      'First the bet, hands-on, step by step. Then the loan, which I will drive on the projector — same machine, different payout table — and you can run it yourself afterwards.',
+      'Wallets are generated in your browser and funded with testnet4 sats — most of you already have sats on the way.',
       'Now: everyone open the URL on the next slide.',
     ],
   },
@@ -276,7 +276,7 @@ cd btcpp-dlc-workshop && pnpm install && pnpm dev`)}
       'Leave this slide up while everyone loads the app, then switch your own screen to the app and drive from there.',
       'Checkpoint: everyone should see the green "DLC engine loaded" line on the home page. If stuck: Chrome, normal window, hard refresh.',
       'Mention the repo is open source — same URL structure, git clone and pnpm dev gives the identical app locally.',
-      'Then start the funding round: attendees paste their two addresses into the room chat, you send ~60k sats to each.',
+      'Funding mop-up: anyone whose addresses have not been funded yet, paste them in the room chat now — ~60k sats each.',
     ],
   },
 ];
