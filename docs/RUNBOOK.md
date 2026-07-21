@@ -15,7 +15,8 @@ Everything you need to run this workshop start to finish. You don't need to be a
 - [ ] Check your **funding wallet** has enough testnet4 sats: budget ~150k sats per attendee pair, plus 500k spare. (Matt maintains the stash — confirm with him.)
 - [ ] Confirm [mempool.space/testnet4](https://mempool.space/testnet4) is up and blocks are flowing (testnet4 blocks are ~10 min like mainnet, sometimes bursty).
 - [ ] Skim [QUESTIONS.md](QUESTIONS.md) once.
-- [ ] Bookmark: the app, mempool.space/testnet4, and the [lending blog post](https://mblack.io/posts/dlc-are-perfect-for-lending/).
+- [ ] Bookmark: the app, mempool.space/testnet4, [dlc-verify](https://lygos-dlc-verify.vercel.app), and the [lending blog post](https://mblack.io/posts/dlc-are-perfect-for-lending/).
+- [ ] During your solo run, do the **Verify** step once so you've seen dlc-verify's output before the room does.
 
 ## T-30 minutes checklist
 
@@ -57,6 +58,7 @@ Drive it live on the projector; attendees follow [tutorial-betting.md](tutorial-
 | Announce | Oracle tab → Create announcement | "The oracle commits to a one-time nonce — everything else builds on this promise." | Everyone has hex |
 | Offer | Paste announcement → Create offer | "Alice commits her 50k, her UTXOs, and the full payout table. Nothing is on-chain yet." | Offer hex visible |
 | Accept | Paste offer → Accept | "Bob pre-signs *every* ending of this bet — but encrypted. These are adaptor signatures." | Accept hex (it's big — that's the sigs) |
+| **Verify** | Open [dlc-verify](https://lygos-dlc-verify.vercel.app), paste offer + accept (blue box on the page links it); add the oracle pubkey from the Oracle tab | "Don't trust my app — this is independent software. It just proved the payout table, the funding address, and every encrypted signature, before a single sat moved." | Projector moment: payout table + "CRYPTOGRAPHICALLY VALID (3/3)" + green oracle badge |
 | Sign | Paste accept → Sign | "Alice verifies Bob's sigs and adds her own. Still nothing on-chain." | Sign hex |
 | Finalize | Paste sign → Finalize + broadcast | "NOW money moves: 100k sats into a 2-of-2 that only the pre-signed outcomes can spend." | Open the funding tx on mempool.space — projector moment |
 | Attest | Oracle tab → pick Spain → Attest | "The oracle signs one word with its committed nonce. It still doesn't know we exist." | Attestation hex |
@@ -70,6 +72,7 @@ Switch all three tabs to `?demo=loan` (links on the home page). Same mechanics, 
 
 - "Same machine, different payout table. Four outcomes is all a loan needs." Show the four outcomes on the offerer page.
 - "This is not a demo version of Lygos — this *is* the Lygos contract." Mention: numeric curves = 1000+ sigs and 2 minutes; this = 4 sigs and 5 seconds; that's why it works on hardware wallets.
+- If the verify moment landed earlier, one line here: "A real borrower would paste their loan contract into dlc-verify before funding — those four outcomes are the *only* places the collateral can go, and you can prove it."
 - Attest **`repaid`** → collateral returns to the borrower. Point at the CET on the explorer.
 - Close with the trust story: "After funding, there is no action Lygos, the lender, or the oracle can take that sends this Bitcoin anywhere but these four places. And if everyone vanishes, the timelock refund fires."
 

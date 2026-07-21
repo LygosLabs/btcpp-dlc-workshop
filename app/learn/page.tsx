@@ -69,6 +69,73 @@ export default function Learn() {
             setup, in case the oracle never attests.
           </li>
         </ul>
+        <div className="grid md:grid-cols-2 gap-4">
+          <div className="space-y-2">
+            <p className="text-zinc-400 text-sm">What the two parties see — the whole contract:</p>
+            <div className="bg-white rounded-lg p-3">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/dlc_participant_view.png"
+                alt="Participant view of a DLC (dlcspecs)"
+                className="w-full"
+              />
+            </div>
+          </div>
+          <div className="space-y-2">
+            <p className="text-zinc-400 text-sm">
+              What the blockchain sees — just a 2-of-2 multisig (BIP67-sorted P2WSH). DLCs are
+              invisible on-chain:
+            </p>
+            <div className="bg-white rounded-lg p-3">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/dlc_outsider_view.png"
+                alt="Outsider view of a DLC (dlcspecs)"
+                className="w-full"
+              />
+            </div>
+          </div>
+        </div>
+        <p className="text-xs text-zinc-600">
+          Diagrams from{' '}
+          <a href="https://github.com/discreetlogcontracts/dlcspecs" className="hover:underline">
+            discreetlogcontracts/dlcspecs
+          </a>
+          , licensed{' '}
+          <a href="https://creativecommons.org/licenses/by/4.0/" className="hover:underline">
+            CC-BY 4.0
+          </a>
+          .
+        </p>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-2xl font-semibold">Verify a contract independently</h2>
+        <p className="text-zinc-400">
+          Because the messages are standardized, you never have to trust the software that
+          produced them. Paste any offer + accept hex into{' '}
+          <a href="https://lygos-dlc-verify.vercel.app" className="text-orange-400 hover:underline">
+            dlc-verify
+          </a>{' '}
+          (
+          <a
+            href="https://github.com/LygosLabs/dlc-verify"
+            className="text-orange-400 hover:underline"
+          >
+            source
+          </a>
+          ) and it proves, from the hex alone: the full payout table, both collaterals, the exact
+          2-of-2 funding address, and that every adaptor signature is cryptographically valid
+          against the oracle&apos;s announced nonce. Add the oracle&apos;s x-only pubkey (shown on
+          the Oracle tab) to confirm the contract uses the oracle you expect — all{' '}
+          <em>before</em> anything touches the chain.
+        </p>
+        <p className="text-zinc-400">
+          Handy detail while you&apos;re staring at hex: DLC messages carry their spec type number
+          up front, so an offer always starts <code className="text-orange-300">a71a</code>{' '}
+          (42778), an accept <code className="text-orange-300">a71c</code> (42780), and a sign{' '}
+          <code className="text-orange-300">a71e</code> (42782).
+        </p>
       </section>
 
       <section className="space-y-4">

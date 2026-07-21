@@ -59,6 +59,7 @@ Running the session? Read [docs/RUNBOOK.md](docs/RUNBOOK.md) first, then [docs/Q
 - [ddk-ffi](https://github.com/bennyhodl/ddk-ffi) / [dlcdevkit](https://github.com/bennyhodl/dlcdevkit) — Rust DLC transaction engine, compiled to `wasm32-wasip1-threads` so it runs in the browser (published as [`@bennyblader/ddk-ts`](https://www.npmjs.com/package/@bennyblader/ddk-ts))
 - Oracle: ~100 lines of pure JS ([lib/oracle.ts](lib/oracle.ts)) — BIP340 signing with a committed nonce
 - Chain data: [mempool.space/testnet4](https://mempool.space/testnet4) esplora API
+- Independent verification: [dlc-verify](https://lygos-dlc-verify.vercel.app) ([source](https://github.com/LygosLabs/dlc-verify)) — paste any offer + accept hex to decode the contract and cryptographically check every adaptor signature
 
 The wasm build needs `SharedArrayBuffer`, so the app ships COOP/COEP headers (see `next.config.mjs`). Use Chrome or Firefox; recent Safari also works.
 

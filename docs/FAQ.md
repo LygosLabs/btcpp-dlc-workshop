@@ -30,6 +30,19 @@ Every message type round-trips byte-for-byte through `serialize()`/`deserialize(
 **Are these messages compatible with other DLC software?**
 Yes — they follow [dlcspecs](https://github.com/discreetlogcontracts/dlcspecs). node-dlc, rust-dlc/dlcdevkit, and bitcoin-s interoperate at the message level.
 
+**How do I verify a DLC without trusting the software that made it?**
+Paste the offer + accept hex into [dlc-verify](https://lygos-dlc-verify.vercel.app) ([source](https://github.com/LygosLabs/dlc-verify)). It independently decodes the payout table and collaterals, reconstructs the 2-of-2 funding address, extracts and checks the oracle pubkey (paste your expected pubkey for an explicit match), and cryptographically verifies every CET adaptor signature against the oracle's announced nonce — all before anything is broadcast. Workshop hex verifies as-is.
+
+**Wire format facts worth knowing** (from [dlcspecs Protocol.md](https://github.com/discreetlogcontracts/dlcspecs/blob/master/Protocol.md) / [Transactions.md](https://github.com/discreetlogcontracts/dlcspecs/blob/master/Transactions.md)):
+
+- Messages carry their type number up front: offer = 42778 (hex starts `a71a`), accept = 42780 (`a71c`), sign = 42782 (`a71e`).
+- `contract_id` = funding txid XOR `temporary_contract_id` XOR (funding output index); the temporary id is the SHA256 of the offer.
+- The funding output is a plain 2-of-2 P2WSH with the pubkeys sorted per BIP 67 — on-chain it's indistinguishable from any other multisig (that's the privacy story).
+- `cet_locktime < refund_locktime`, and both must be the same kind (both block heights or both timestamps).
+- Minimums: each party's collateral ≥ 1000 sats; CET outputs under 1000 sats are omitted as dust.
+- Fees are paid up front out of the funding output, so CETs pay out exact contract amounts.
+- All funding inputs must be segwit (or P2SH-wrapped segwit) — malleability protection.
+
 **Gotcha: adaptor signatures split on deserialize.**
 A DLC adaptor signature is 162 bytes. Live in-memory objects from BAL carry all 162 bytes in `encryptedSig`; after a serialize/deserialize round-trip, `@node-dlc/messaging` splits them into `encryptedSig` (65) + `dleqProof` (97). If you hand-roll code that consumes adaptor sigs, handle both shapes. (BAL's `execute` had exactly this bug — fixed in [bitcoin-abstraction-layer#212](https://github.com/AtomicFinance/bitcoin-abstraction-layer/pull/212).)
 

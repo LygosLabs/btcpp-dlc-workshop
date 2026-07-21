@@ -161,9 +161,61 @@ offer.serialize().toString('hex');  // byte-identical round-trip`)}
     ),
     notes: [
       'The hex blobs you will copy between tabs are not app-specific — they are the standard DLC messages from the dlcspecs repo, the same spec suredbits, Atomic Finance, and Lygos implement.',
+      'Fun detail: every offer you create today will start with the hex a71a — that is 42778, the spec\'s message type number for a DLC offer. Accepts start a71c, signs a71e.',
       'The @node-dlc TypeScript library parses and produces them: paste any offer hex into DlcOffer.deserialize and you get a full object — collateral, payout table, funding inputs.',
       'That means what you build today interoperates: your counterparty could be running completely different software.',
       'The "Learn" page on the app has runnable snippets for this.',
+    ],
+  },
+  {
+    title: "Don't trust, verify",
+    body: (
+      <div className="space-y-6">
+        <p className="text-2xl">
+          Paste any offer + accept into{' '}
+          <span className="text-orange-400">lygos-dlc-verify.vercel.app</span> and independent
+          software proves, from the hex alone:
+        </p>
+        <ul className="space-y-3 text-xl text-zinc-300">
+          <li>📋 The full payout table and both collaterals</li>
+          <li>🏦 The exact 2-of-2 funding address your sats would go to</li>
+          <li>🔐 Every adaptor signature is cryptographically valid — one per outcome</li>
+          <li>🔮 The oracle pubkey matches the oracle you expect</li>
+        </ul>
+        <p className="text-zinc-400 text-xl">
+          All <em>before</em> a single sat moves on-chain.
+        </p>
+      </div>
+    ),
+    notes: [
+      'This is the answer to "why is a standardized wire format such a big deal": you never have to trust the software your counterparty used — or the software YOU used.',
+      'dlc-verify is a separate open-source tool (LygosLabs/dlc-verify on GitHub). It re-derives the funding transaction and all settlement transactions from the messages and checks every adaptor signature against the oracle\'s announced nonce.',
+      'You will do this today: right after the accept step, we paste our offer and accept hex in and watch it print the payout table and "cryptographically valid" for every outcome.',
+      'Key line to land: the moment you can verify all this from two hex strings, counterparty risk before funding is zero — walk away and nothing was ever at stake.',
+    ],
+  },
+  {
+    title: 'What the blockchain sees',
+    body: (
+      <div className="space-y-4">
+        <div className="bg-white rounded-lg p-3 max-w-3xl mx-auto">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/dlc_outsider_view.png"
+            alt="Outsider view of a DLC (dlcspecs)"
+            className="w-full"
+          />
+        </div>
+        <p className="text-xl text-zinc-400 text-center">
+          Just a 2-of-2 multisig. DLCs are <span className="text-orange-400">invisible on-chain</span>.
+        </p>
+      </div>
+    ),
+    notes: [
+      'Also from the official dlcspecs: this is everything an outside observer can see — one funding output and one spend. No outcomes, no payout table, no oracle, no hint it was even a DLC.',
+      'The funding output is a standard 2-of-2 pay-to-witness-script-hash, with the two pubkeys sorted the standard way (BIP 67) — indistinguishable from a Lightning channel or any other multisig.',
+      'Privacy is by construction, not an add-on: the contract terms only ever existed in the messages the two parties exchanged.',
+      'We will look at our own funding transaction on the block explorer later and confirm: it looks like nothing.',
     ],
   },
   {

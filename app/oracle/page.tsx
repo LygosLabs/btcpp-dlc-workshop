@@ -19,6 +19,39 @@ function loadOracle(eventId: string): WorkshopOracle {
   return new WorkshopOracle(stored.priv, stored.nonces[eventId]);
 }
 
+function OraclePubkey({ announcementHex }: { announcementHex: string }) {
+  let pubkey = '';
+  try {
+    pubkey = OracleAnnouncement.deserialize(Buffer.from(announcementHex, 'hex'))
+      .oraclePublicKey.toString('hex');
+  } catch {
+    return null;
+  }
+  return (
+    <div className="text-sm flex items-center gap-2 flex-wrap">
+      <span className="text-zinc-400">Your oracle pubkey (x-only):</span>
+      <code className="bg-zinc-900 px-2 py-1 rounded text-orange-300 break-all">{pubkey}</code>
+      <button
+        className="text-xs px-2 py-1 rounded bg-zinc-700 hover:bg-zinc-600"
+        onClick={() => navigator.clipboard.writeText(pubkey)}
+      >
+        copy
+      </button>
+      <span className="text-zinc-500">
+        — paste it into{' '}
+        <a
+          href="https://lygos-dlc-verify.vercel.app"
+          target="_blank"
+          className="underline text-zinc-400"
+        >
+          dlc-verify
+        </a>{' '}
+        to prove a contract uses <em>your</em> oracle
+      </span>
+    </div>
+  );
+}
+
 function OraclePage() {
   const demo = DEMOS[useSearchParams().get('demo') === 'loan' ? 'loan' : 'bet'];
   const [announcementHex, setAnnouncementHex] = usePersisted(`${demo.id}-announcement-hex`);
@@ -75,6 +108,7 @@ function OraclePage() {
         </p>
         <ActionButton onClick={announce}>Create announcement</ActionButton>
         <HexOutput label="Oracle announcement" value={announcementHex} />
+        {announcementHex && <OraclePubkey announcementHex={announcementHex} />}
       </Step>
 
       <Step n={2} title="Attest to the outcome" done={!!attestationHex}>

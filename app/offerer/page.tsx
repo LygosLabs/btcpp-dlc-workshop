@@ -19,6 +19,7 @@ import {
   HexInput,
   HexOutput,
   Step,
+  VerifyCallout,
   WalletPanel,
 } from '../components';
 
@@ -136,6 +137,7 @@ function OffererPage() {
           tab.
         </p>
         <HexInput label="DLC accept (from the Accepter tab)" value={acceptHex} onChange={setAcceptHex} />
+        {offerHex && acceptHex && <VerifyCallout />}
         <ActionButton onClick={signAccept} busy={busy} disabled={!acceptHex || !offerHex}>
           Sign accept
         </ActionButton>

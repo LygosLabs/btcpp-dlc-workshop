@@ -174,6 +174,28 @@ export function WalletPanel({
   );
 }
 
+export function VerifyCallout() {
+  return (
+    <div className="border border-sky-900 bg-sky-950/30 rounded-lg p-4 text-sm space-y-1">
+      <p className="text-sky-300 font-semibold">🔍 Don&apos;t trust this app — verify the contract</p>
+      <p className="text-zinc-400">
+        You now hold the offer and accept messages. Paste both into{' '}
+        <a
+          href="https://lygos-dlc-verify.vercel.app"
+          target="_blank"
+          className="text-orange-400 hover:underline"
+        >
+          dlc-verify
+        </a>{' '}
+        — independent software that decodes the payout table, reconstructs the 2-of-2 funding
+        address, and cryptographically verifies every adaptor signature. Add the oracle&apos;s
+        pubkey (shown on the Oracle tab) to prove the contract really uses your oracle. Nothing
+        is on-chain yet — this is the audit-before-you-fund moment.
+      </p>
+    </div>
+  );
+}
+
 export function TxLink({ label, txid }: { label: string; txid: string }) {
   if (!txid) return null;
   return (

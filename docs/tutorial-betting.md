@@ -53,6 +53,10 @@ On the **Accepter** tab:
 
 ✅ **You should see:** a DLC accept (a few KB). Copy it.
 
+### Optional: verify the contract before funding it
+
+You now hold the offer and the accept — the entire contract, and nothing is on-chain yet. Paste both into **[dlc-verify](https://lygos-dlc-verify.vercel.app)** and independent software will decode the payout table, reconstruct the exact 2-of-2 funding address, and cryptographically check every adaptor signature. Paste your oracle's pubkey too (shown on the Oracle tab under the announcement) and it confirms the contract really uses *your* oracle. This is the point of a standardized format: you audit the deal before a single sat moves, with software neither party controls.
+
 ## Step 5 — Offerer: sign
 
 Back on the **Offerer** tab, paste the accept into step 4 and click **Sign accept**.

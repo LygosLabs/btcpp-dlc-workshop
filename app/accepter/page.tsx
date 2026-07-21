@@ -25,6 +25,7 @@ import {
   HexOutput,
   Step,
   TxLink,
+  VerifyCallout,
   WalletPanel,
 } from '../components';
 
@@ -137,6 +138,7 @@ function AccepterPage() {
           Accept offer
         </ActionButton>
         <HexOutput label="DLC accept" value={acceptHex} />
+        {acceptHex && <VerifyCallout />}
       </Step>
 
       <Step n={3} title="Finalize and broadcast the funding transaction" done={!!fundTxId}>
