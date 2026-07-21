@@ -26,6 +26,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Link href="/accepter" className="hover:text-orange-300">
             Accepter
           </Link>
+          <Link href="/learn" className="hover:text-orange-300">
+            Learn
+          </Link>
           <span className="ml-auto text-xs text-amber-400">
             testnet4 only — never use these keys with real funds
           </span>

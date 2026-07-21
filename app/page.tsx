@@ -73,6 +73,16 @@ export default function Home() {
           Messages travel between tabs as hex — copy and paste them just like real DLC peers
           exchanging messages over the wire.
         </p>
+        <p>
+          Want the theory and the code?{' '}
+          <Link href="/learn" className="text-orange-400 hover:underline">
+            How DLCs actually work
+          </Link>{' '}
+          · presenting?{' '}
+          <Link href="/slides" className="text-orange-400 hover:underline">
+            slides
+          </Link>
+        </p>
       </section>
     </div>
   );

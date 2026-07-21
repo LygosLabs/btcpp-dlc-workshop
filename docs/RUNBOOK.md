@@ -22,11 +22,13 @@ Everything you need to run this workshop start to finish. You don't need to be a
 - [ ] Projector + wifi test; open the app's three tabs (bet demo) in your presenting browser.
 - [ ] In a **second browser profile**, keep your completed run from yesterday open — if live demo gods misbehave, you can show the finished state instantly.
 - [ ] Have your funding wallet open and unlocked, ready to send sats to attendee addresses.
-- [ ] Write the app URL big on a slide/whiteboard.
+- [ ] Open **[/slides](https://btcpp-dlc-workshop.vercel.app/slides)** full-screen in its own window — the intro talk and the big-URL slide live there. Arrow keys navigate; press **N** to see per-slide presenter notes.
 
 ---
 
 ## 0:00–0:10 — Intro talk
+
+Present from **[/slides](https://btcpp-dlc-workshop.vercel.app/slides)** — 10 slides matching the talking points below, ending on the big-URL slide. Press **N** for word-for-word presenter notes on each slide; rehearse with them, then present with notes off if you're comfortable. The last slide stays up while the room loads the app, then you switch to the app and drive from there.
 
 Talking points (say it in your own words; each bullet is ~1 minute):
 

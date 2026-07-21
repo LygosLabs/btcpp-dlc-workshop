@@ -48,7 +48,9 @@ Oracle          Offerer                    Accepter
 
 Step-by-step guides: [docs/tutorial-betting.md](docs/tutorial-betting.md) · [docs/tutorial-lending.md](docs/tutorial-lending.md)
 
-Running the session? Read [docs/RUNBOOK.md](docs/RUNBOOK.md) first, then [docs/QUESTIONS.md](docs/QUESTIONS.md).
+Developer? The hosted app has a [Learn page](https://btcpp-dlc-workshop.vercel.app/learn) (DLC anatomy + parsing messages with `@node-dlc`), and [docs/FAQ.md](docs/FAQ.md) covers the sharp edges we hit building this.
+
+Running the session? Read [docs/RUNBOOK.md](docs/RUNBOOK.md) first, then [docs/QUESTIONS.md](docs/QUESTIONS.md). The intro talk lives at [/slides](https://btcpp-dlc-workshop.vercel.app/slides) (arrow keys to navigate, `N` for presenter notes).
 
 ## What's under the hood
 
