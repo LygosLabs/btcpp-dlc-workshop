@@ -33,7 +33,40 @@ export function Step({
   );
 }
 
-export function HexOutput({ label, value }: { label: string; value: string }) {
+/** These are real protocol messages — let people look inside them. */
+function DecodePeek({ hex, decode }: { hex: string; decode: (hex: string) => unknown }) {
+  const [json, setJson] = useState<string | null>(null);
+  if (!hex) return null;
+  const run = () => {
+    try {
+      setJson(
+        JSON.stringify(decode(hex), (_, v) => (typeof v === 'bigint' ? v.toString() : v), 2),
+      );
+    } catch (e) {
+      setJson(`decode failed: ${String(e)}`);
+    }
+  };
+  return (
+    <details className="text-xs" onToggle={(e) => (e.target as HTMLDetailsElement).open && run()}>
+      <summary className="cursor-pointer text-zinc-500 hover:text-zinc-300 select-none">
+        🔎 decode this message (deserialize + toJSON)
+      </summary>
+      <pre className="mt-1 max-h-72 overflow-auto bg-zinc-900 border border-zinc-800 rounded p-2 font-mono text-zinc-300 whitespace-pre-wrap break-all">
+        {json ?? 'decoding…'}
+      </pre>
+    </details>
+  );
+}
+
+export function HexOutput({
+  label,
+  value,
+  decode,
+}: {
+  label: string;
+  value: string;
+  decode?: (hex: string) => unknown;
+}) {
   const [copied, setCopied] = useState(false);
   if (!value) return null;
   return (
@@ -59,6 +92,7 @@ export function HexOutput({ label, value }: { label: string; value: string }) {
         rows={3}
         className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs font-mono text-zinc-300"
       />
+      {decode && <DecodePeek hex={value} decode={decode} />}
     </div>
   );
 }
@@ -68,11 +102,13 @@ export function HexInput({
   value,
   onChange,
   placeholder,
+  decode,
 }: {
   label: string;
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
+  decode?: (hex: string) => unknown;
 }) {
   return (
     <div className="space-y-1">
@@ -84,7 +120,27 @@ export function HexInput({
         placeholder={placeholder ?? 'paste hex here'}
         className="w-full bg-zinc-900 border border-zinc-800 rounded p-2 text-xs font-mono text-zinc-300"
       />
+      {decode && <DecodePeek hex={value} decode={decode} />}
     </div>
+  );
+}
+
+export function ResetDemo({ demoId }: { demoId: string }) {
+  return (
+    <p className="text-xs text-zinc-600">
+      <button
+        className="underline hover:text-zinc-400"
+        onClick={() => {
+          Object.keys(localStorage)
+            .filter((k) => k.startsWith(`${demoId}-`))
+            .forEach((k) => localStorage.removeItem(k));
+          location.reload();
+        }}
+      >
+        reset this demo&apos;s state
+      </button>{' '}
+      (clears messages/txids for this demo in this tab&apos;s browser; wallets and oracle keys stay)
+    </p>
   );
 }
 
@@ -163,11 +219,15 @@ export function WalletPanel({
       </div>
       {info.balance === 0 && (
         <p className="text-amber-400">
-          Fund this address with testnet4 sats — ask the presenter, or use{' '}
+          Fund this address with testnet4 sats — ask the presenter, or use the{' '}
           <a className="underline" href="https://mempool.space/testnet4/faucet" target="_blank">
-            the mempool.space faucet
-          </a>
-          .
+            mempool.space faucet
+          </a>{' '}
+          (free account) or{' '}
+          <a className="underline" href="https://coinfaucet.eu/en/btc-testnet4/" target="_blank">
+            coinfaucet.eu
+          </a>{' '}
+          (no login).
         </p>
       )}
     </div>

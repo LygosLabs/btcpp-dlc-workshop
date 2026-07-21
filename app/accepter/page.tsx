@@ -23,11 +23,19 @@ import {
   ErrorBox,
   HexInput,
   HexOutput,
+  ResetDemo,
   Step,
   TxLink,
   VerifyCallout,
   WalletPanel,
 } from '../components';
+
+const decoders = {
+  offer: (h: string) => DlcOffer.deserialize(Buffer.from(h, 'hex')).toJSON(),
+  accept: (h: string) => DlcAccept.deserialize(Buffer.from(h, 'hex')).toJSON(),
+  sign: (h: string) => DlcSign.deserialize(Buffer.from(h, 'hex')).toJSON(),
+  attestation: (h: string) => OracleAttestation.deserialize(Buffer.from(h, 'hex')).toJSON(),
+};
 
 type BrowserClient = Awaited<ReturnType<typeof buildBrowserClient>>;
 
@@ -133,11 +141,16 @@ function AccepterPage() {
           your adaptor signatures — pre-signed settlement transactions that only become valid
           when the oracle attests. Copy the accept hex into the Offerer tab.
         </p>
-        <HexInput label="DLC offer (from the Offerer tab)" value={offerHex} onChange={setOfferHex} />
+        <HexInput
+          label="DLC offer (from the Offerer tab)"
+          value={offerHex}
+          onChange={setOfferHex}
+          decode={decoders.offer}
+        />
         <ActionButton onClick={accept} busy={busy} disabled={!offerHex || !wallet}>
           Accept offer
         </ActionButton>
-        <HexOutput label="DLC accept" value={acceptHex} />
+        <HexOutput label="DLC accept" value={acceptHex} decode={decoders.accept} />
         {acceptHex && <VerifyCallout />}
       </Step>
 
@@ -147,7 +160,12 @@ function AccepterPage() {
           collaterals move into a 2-of-2 multisig that can only be spent by one of the pre-signed
           outcome transactions (or the timelocked refund).
         </p>
-        <HexInput label="DLC sign (from the Offerer tab)" value={signHex} onChange={setSignHex} />
+        <HexInput
+          label="DLC sign (from the Offerer tab)"
+          value={signHex}
+          onChange={setSignHex}
+          decode={decoders.sign}
+        />
         <ActionButton onClick={finalize} busy={busy} disabled={!signHex || !acceptHex}>
           Finalize + broadcast
         </ActionButton>
@@ -164,6 +182,7 @@ function AccepterPage() {
           label="Oracle attestation (from the Oracle tab)"
           value={attestationHex}
           onChange={setAttestationHex}
+          decode={decoders.attestation}
         />
         <ActionButton onClick={execute} busy={busy} disabled={!attestationHex || !fundTxId}>
           Execute DLC
@@ -172,6 +191,7 @@ function AccepterPage() {
       </Step>
 
       <ErrorBox error={error} />
+      <ResetDemo demoId={demo.id} />
     </div>
   );
 }

@@ -54,7 +54,7 @@ Running the session? Read [docs/RUNBOOK.md](docs/RUNBOOK.md) first, then [docs/Q
 
 ## What's under the hood
 
-- [bitcoin-abstraction-layer](https://github.com/AtomicFinance/bitcoin-abstraction-layer) (BAL) 4.3.2 — wallet + DLC client (`BitcoinDdkProvider`)
+- [bitcoin-abstraction-layer](https://github.com/AtomicFinance/bitcoin-abstraction-layer) (BAL) 4.3.5 — wallet + DLC client (`BitcoinDdkProvider`)
 - [node-dlc](https://github.com/AtomicFinance/node-dlc) 1.2.x — DLC protocol messages (offer/accept/sign, announcements, attestations)
 - [ddk-ffi](https://github.com/bennyhodl/ddk-ffi) / [dlcdevkit](https://github.com/bennyhodl/dlcdevkit) — Rust DLC transaction engine, compiled to `wasm32-wasip1-threads` so it runs in the browser (published as [`@bennyblader/ddk-ts`](https://www.npmjs.com/package/@bennyblader/ddk-ts))
 - Oracle: ~100 lines of pure JS ([lib/oracle.ts](lib/oracle.ts)) — BIP340 signing with a committed nonce
@@ -67,7 +67,8 @@ The wasm build needs `SharedArrayBuffer`, so the app ships COOP/COEP headers (se
 
 1. Read the [Introduction to DLCs](https://github.com/discreetlogcontracts/dlcspecs/blob/master/Introduction.md)
 2. Bring a laptop with Chrome — that's it, everything runs in the browser
-3. Optional deeper dives: [Discreet Log Contracts part 1–4](https://mblack.io/posts/discreet-log-contracts-part-1-what-is-a-discreet-log-contract/), the [DLC whitepaper](https://adiabat.github.io/dlc.pdf)
+3. Sats come from the presenter during the session; solo runners can use the [mempool.space testnet4 faucet](https://mempool.space/testnet4/faucet) (free account) or [coinfaucet.eu](https://coinfaucet.eu/en/btc-testnet4/) (no login)
+4. Optional deeper dives: [Discreet Log Contracts part 1–4](https://mblack.io/posts/discreet-log-contracts-part-1-what-is-a-discreet-log-contract/), the [DLC whitepaper](https://adiabat.github.io/dlc.pdf)
 
 ## Repo layout
 

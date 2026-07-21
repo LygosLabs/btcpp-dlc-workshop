@@ -10,12 +10,12 @@
     "spike": "tsx scripts/spike-e2e.ts"
   },
   "dependencies": {
-    "@atomicfinance/bitcoin-ddk-provider": "4.3.3",
-    "@atomicfinance/bitcoin-esplora-api-provider": "4.3.3",
-    "@atomicfinance/bitcoin-js-wallet-provider": "4.3.3",
-    "@atomicfinance/client": "4.3.3",
-    "@atomicfinance/provider": "4.3.3",
-    "@atomicfinance/types": "4.3.3",
+    "@atomicfinance/bitcoin-ddk-provider": "4.3.5",
+    "@atomicfinance/bitcoin-esplora-api-provider": "4.3.5",
+    "@atomicfinance/bitcoin-js-wallet-provider": "4.3.5",
+    "@atomicfinance/client": "4.3.5",
+    "@atomicfinance/provider": "4.3.5",
+    "@atomicfinance/types": "4.3.5",
     "@bennyblader/ddk-ts": "0.3.43",
     "@noble/curves": "^1.6.0",
     "@node-dlc/bitcoin": "1.2.1",
@@ -48,15 +48,12 @@
       "@node-dlc/bufio": "1.2.1",
       "@node-dlc/crypto": "1.2.1",
       "@node-dlc/common": "1.2.1",
-      "@atomicfinance/types": "4.3.3"
+      "@atomicfinance/types": "4.3.5"
     },
     "supportedArchitectures": {
       "cpu": [
         "wasm32"
       ]
-    },
-    "patchedDependencies": {
-      "@atomicfinance/bitcoin-ddk-provider@4.3.3": "patches/@atomicfinance__bitcoin-ddk-provider@4.3.3.patch"
     }
   }
 }

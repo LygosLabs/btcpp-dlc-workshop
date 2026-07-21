@@ -2,7 +2,7 @@
 
 You'll enter a real Bitcoin contract (on testnet4) that pays out based on who won the 2026 World Cup Final: **Spain vs Argentina**. Even money, winner takes all, settled by an oracle — with the oracle never touching, seeing, or controlling the funds.
 
-**You need:** a laptop with Chrome, ~15 minutes, and some testnet4 sats (the presenter will send you some, or use the [mempool.space faucet](https://mempool.space/testnet4/faucet)).
+**You need:** a laptop with Chrome, ~15 minutes, and some testnet4 sats (the presenter will send you some; running solo, use the [mempool.space faucet](https://mempool.space/testnet4/faucet) — free account — or [coinfaucet.eu](https://coinfaucet.eu/en/btc-testnet4/), no login).
 
 ## Setup: open three tabs
 

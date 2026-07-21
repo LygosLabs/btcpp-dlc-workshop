@@ -44,7 +44,17 @@ Paste the offer + accept hex into [dlc-verify](https://lygos-dlc-verify.vercel.a
 - All funding inputs must be segwit (or P2SH-wrapped segwit) — malleability protection.
 
 **Gotcha: adaptor signatures split on deserialize.**
-A DLC adaptor signature is 162 bytes. Live in-memory objects from BAL carry all 162 bytes in `encryptedSig`; after a serialize/deserialize round-trip, `@node-dlc/messaging` splits them into `encryptedSig` (65) + `dleqProof` (97). If you hand-roll code that consumes adaptor sigs, handle both shapes. (BAL's `execute` had exactly this bug — fixed in [bitcoin-abstraction-layer#212](https://github.com/AtomicFinance/bitcoin-abstraction-layer/pull/212).)
+A DLC adaptor signature is 162 bytes. Live in-memory objects from BAL carry all 162 bytes in `encryptedSig`; after a serialize/deserialize round-trip, `@node-dlc/messaging` splits them into `encryptedSig` (65) + `dleqProof` (97). If you hand-roll code that consumes adaptor sigs, handle both shapes. (BAL's `execute` had exactly this bug — fixed in [#212](https://github.com/AtomicFinance/bitcoin-abstraction-layer/pull/212), released in `@atomicfinance/*` **4.3.5**, which this repo uses.)
+
+**How do I decode a message from the command line?**
+
+```bash
+# in this repo — auto-detects offer/accept/sign/announcement/attestation
+pnpm exec tsx scripts/decode.ts <hex>
+pbpaste | pnpm exec tsx scripts/decode.ts
+```
+
+Every hex box in the app also has a "🔎 decode this message" toggle that shows the same `toJSON()` output in place.
 
 ## Oracles
 
@@ -61,6 +71,9 @@ Lygos uses Magnolia Financial's oracle in production. For development, running y
 
 **Gotcha: testnet4 network config.**
 There is no `bitcoin_testnet4` network object in BAL — use `BitcoinNetworks.bitcoin_testnet`. Testnet4 shares testnet3's address prefixes (`tb1`) and coin type, so only the esplora URL changes: `https://mempool.space/testnet4/api`.
+
+**Where do I get testnet4 sats?**
+[mempool.space/testnet4/faucet](https://mempool.space/testnet4/faucet) (needs a free mempool account) or [coinfaucet.eu/en/btc-testnet4](https://coinfaucet.eu/en/btc-testnet4/) (no login). During the workshop, the presenter sends sats directly — faucets are the backup.
 
 **Why does the browser build need COOP/COEP headers?**
 The wasm build targets `wasm32-wasip1-threads`, which uses `SharedArrayBuffer` for its thread pool. Browsers only enable `SharedArrayBuffer` on cross-origin-isolated pages, so the app sends `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Embedder-Policy: require-corp` (see `next.config.mjs`). Consequence: every cross-origin resource you load needs CORS/CORP headers (mempool.space's API is fine).

@@ -30,9 +30,9 @@ Everything you need to run this workshop start to finish. You don't need to be a
 
 ## 0:00–0:08 — Intro talk
 
-Present from **[/slides](https://btcpp-dlc-workshop.vercel.app/slides)** — 12 slides matching the talking points below, ending on the big-URL slide. Press **N** for word-for-word presenter notes on each slide; rehearse with them, then present with notes off if you're comfortable. The last slide stays up while the room loads the app, then you switch to the app and drive from there.
+Present from **[/slides](https://btcpp-dlc-workshop.vercel.app/slides)** — 16 slides matching the talking points below, ending on the big-URL slide. Press **N** for word-for-word presenter notes on each slide; rehearse with them, then present with notes off if you're comfortable. The last slide stays up while the room loads the app, then you switch to the app and drive from there.
 
-**Pace: ~8 minutes total — keep each slide to ~30–40 seconds.** The notes are complete sentences; you don't need to say all of them. If you're running long, the compressible slides are "If things go wrong" and "Don't trust, verify" (one line each — you'll demo the verify moment live anyway).
+**Pace: ~8 minutes total — ~30 seconds a slide.** The notes are complete sentences; you don't need to say all of them. The four "Inside the offer/accept/sign" + "The negotiation" slides are point-at-the-picture slides (~20 s each — you'll see the same fields live in the demo's decode toggles). If running long, compress "If things go wrong" and "Don't trust, verify" to one line each.
 
 Talking points (say it in your own words):
 
@@ -49,7 +49,7 @@ If you started funding pre-session (do!), this section is just mop-up:
 
 1. Everyone opens the app URL → home page. Confirm they see "✓ DLC engine loaded". *(If someone's stuck loading: use Chrome, hard-refresh.)*
 2. Everyone opens the three tabs (Oracle / Offerer / Accepter, bet demo).
-3. **Funding mop-up:** anyone who didn't get sats yet pastes their two addresses into the room chat; send **~60k sats to each address** from the funding wallet. Faucet as backup: mempool.space/testnet4/faucet.
+3. **Funding mop-up:** anyone who didn't get sats yet pastes their two addresses into the room chat; send **~60k sats to each address** from the funding wallet. Faucets as backup: mempool.space/testnet4/faucet (free account) or coinfaucet.eu/en/btc-testnet4 (no login).
 4. While the last sats propagate: walk through the home page diagram — who sends what to whom.
 
 > Checkpoint before moving on: **"Raise your hand if both your wallets show a balance."** Don't hold the room for stragglers — pair anyone unfunded with a neighbor and keep moving; they can run it solo after.

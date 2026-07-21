@@ -1,13 +1,18 @@
 'use client';
 
-import { OracleAnnouncement } from '@node-dlc/messaging';
+import { OracleAnnouncement, OracleAttestation } from '@node-dlc/messaging';
 import { useSearchParams } from 'next/navigation';
 import { Suspense, useState } from 'react';
 
 import { DEMOS } from '../../lib/contracts';
 import { WorkshopOracle } from '../../lib/oracle';
 import { usePersisted } from '../../lib/use-persisted';
-import { ActionButton, ErrorBox, HexOutput, Step } from '../components';
+import { ActionButton, ErrorBox, HexOutput, ResetDemo, Step } from '../components';
+
+const decodeAnnouncement = (h: string) =>
+  OracleAnnouncement.deserialize(Buffer.from(h, 'hex')).toJSON();
+const decodeAttestation = (h: string) =>
+  OracleAttestation.deserialize(Buffer.from(h, 'hex')).toJSON();
 
 /** Oracle keys live in localStorage: one private key, one nonce per event. */
 function loadOracle(eventId: string): WorkshopOracle {
@@ -107,7 +112,7 @@ function OraclePage() {
           paste it into the Offerer tab.
         </p>
         <ActionButton onClick={announce}>Create announcement</ActionButton>
-        <HexOutput label="Oracle announcement" value={announcementHex} />
+        <HexOutput label="Oracle announcement" value={announcementHex} decode={decodeAnnouncement} />
         {announcementHex && <OraclePubkey announcementHex={announcementHex} />}
       </Step>
 
@@ -131,10 +136,11 @@ function OraclePage() {
           </select>
           <ActionButton onClick={attest}>Attest</ActionButton>
         </div>
-        <HexOutput label="Oracle attestation" value={attestationHex} />
+        <HexOutput label="Oracle attestation" value={attestationHex} decode={decodeAttestation} />
       </Step>
 
       <ErrorBox error={error} />
+      <ResetDemo demoId={demo.id} />
     </div>
   );
 }

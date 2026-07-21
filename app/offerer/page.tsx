@@ -1,7 +1,7 @@
 'use client';
 
 import { InputSupplementationMode } from '@atomicfinance/types';
-import { DlcAccept, DlcOffer, OracleAnnouncement } from '@node-dlc/messaging';
+import { DlcAccept, DlcOffer, DlcSign, OracleAnnouncement } from '@node-dlc/messaging';
 import { useSearchParams } from 'next/navigation';
 import { Suspense, useCallback, useEffect, useState } from 'react';
 
@@ -18,10 +18,18 @@ import {
   ErrorBox,
   HexInput,
   HexOutput,
+  ResetDemo,
   Step,
   VerifyCallout,
   WalletPanel,
 } from '../components';
+
+const decoders = {
+  announcement: (h: string) => OracleAnnouncement.deserialize(Buffer.from(h, 'hex')).toJSON(),
+  offer: (h: string) => DlcOffer.deserialize(Buffer.from(h, 'hex')).toJSON(),
+  accept: (h: string) => DlcAccept.deserialize(Buffer.from(h, 'hex')).toJSON(),
+  sign: (h: string) => DlcSign.deserialize(Buffer.from(h, 'hex')).toJSON(),
+};
 
 type BrowserClient = Awaited<ReturnType<typeof buildBrowserClient>>;
 
@@ -115,6 +123,7 @@ function OffererPage() {
           label="Oracle announcement (from the Oracle tab)"
           value={announcementHex}
           onChange={setAnnouncementHex}
+          decode={decoders.announcement}
         />
       </Step>
 
@@ -126,7 +135,7 @@ function OffererPage() {
         <ActionButton onClick={createOffer} busy={busy} disabled={!announcementHex || !wallet}>
           Create offer
         </ActionButton>
-        <HexOutput label="DLC offer" value={offerHex} />
+        <HexOutput label="DLC offer" value={offerHex} decode={decoders.offer} />
       </Step>
 
       <Step n={4} title="Sign the accept message" done={!!signHex}>
@@ -136,15 +145,21 @@ function OffererPage() {
           possible outcome, {demo.outcomes.length} in total. Copy the result back to the Accepter
           tab.
         </p>
-        <HexInput label="DLC accept (from the Accepter tab)" value={acceptHex} onChange={setAcceptHex} />
+        <HexInput
+          label="DLC accept (from the Accepter tab)"
+          value={acceptHex}
+          onChange={setAcceptHex}
+          decode={decoders.accept}
+        />
         {offerHex && acceptHex && <VerifyCallout />}
         <ActionButton onClick={signAccept} busy={busy} disabled={!acceptHex || !offerHex}>
           Sign accept
         </ActionButton>
-        <HexOutput label="DLC sign" value={signHex} />
+        <HexOutput label="DLC sign" value={signHex} decode={decoders.sign} />
       </Step>
 
       <ErrorBox error={error} />
+      <ResetDemo demoId={demo.id} />
     </div>
   );
 }

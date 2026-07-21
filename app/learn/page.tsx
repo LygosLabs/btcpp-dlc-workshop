@@ -175,6 +175,12 @@ console.log(accept.cetAdaptorSignatures.sigs.length); // one per outcome
 const ann = OracleAnnouncement.deserialize(Buffer.from(announcementHex, 'hex'));
 console.log(ann.oracleEvent.eventId);            // 'wc2026-final'`}</Code>
         <p className="text-zinc-400">
+          In this repo you can decode any message from the command line —{' '}
+          <code className="text-orange-300">pnpm exec tsx scripts/decode.ts &lt;hex&gt;</code>{' '}
+          auto-detects the type and prints the JSON. The app does the same in place: every hex box
+          has a &ldquo;🔎 decode this message&rdquo; toggle.
+        </p>
+        <p className="text-zinc-400">
           Because it&apos;s a standardized format, your counterparty can run entirely different
           software — a Rust daemon built on{' '}
           <a href="https://github.com/bennyhodl/dlcdevkit" className="text-orange-400 hover:underline">

@@ -60,20 +60,27 @@ const SLIDES: Slide[] = [
   {
     title: 'What a DLC is',
     body: (
-      <ol className="space-y-4 text-2xl list-decimal list-inside">
-        <li>
-          Two parties lock funds in a plain <span className="text-orange-400">2-of-2 multisig</span>
-        </li>
-        <li>
-          Before locking anything, they pre-sign{' '}
-          <span className="text-orange-400">one settlement transaction per outcome</span>
-        </li>
-        <li>
-          Those signatures are <span className="text-orange-400">encrypted</span> (&ldquo;adaptor
-          signatures&rdquo;) — only the oracle&apos;s future signature on the real outcome can
-          decrypt the matching one
-        </li>
-      </ol>
+      <div className="grid md:grid-cols-2 gap-6 items-center">
+        <ol className="space-y-4 text-xl list-decimal list-inside">
+          <li>
+            Two parties lock funds in a plain{' '}
+            <span className="text-orange-400">2-of-2 multisig</span>
+          </li>
+          <li>
+            Before locking anything, they pre-sign{' '}
+            <span className="text-orange-400">one settlement transaction per outcome</span>
+          </li>
+          <li>
+            Those signatures are <span className="text-orange-400">encrypted</span> (&ldquo;adaptor
+            signatures&rdquo;) — only the oracle&apos;s future signature on the real outcome can
+            decrypt the matching one
+          </li>
+        </ol>
+        <div className="bg-white rounded-lg p-2">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/funding_process.png" alt="UTXOs into a 2-of-2, out to CETs and refund" className="w-full" />
+        </div>
+      </div>
     ),
     notes: [
       'Discreet Log Contract — discreet as in private, and a pun on discrete logarithms.',
@@ -100,19 +107,25 @@ const SLIDES: Slide[] = [
   {
     title: 'The oracle — what it is and is not',
     body: (
-      <ul className="space-y-4 text-2xl">
-        <li>
-          Publishes exactly two things: an <span className="text-orange-400">announcement</span>{' '}
-          (&ldquo;I will sign the World Cup result, here is my one-time nonce&rdquo;) and an{' '}
-          <span className="text-orange-400">attestation</span> (the signature on{' '}
-          <code className="text-orange-400">spain</code>)
-        </li>
-        <li>Never sees the contract, the parties, the addresses, or the amounts</li>
-        <li>
-          <span className="text-orange-400">Cannot steal funds</span> — it&apos;s a referee shouting
-          the score into the void
-        </li>
-      </ul>
+      <div className="space-y-6">
+        <ul className="space-y-3 text-xl">
+          <li>
+            Publishes exactly two things: an <span className="text-orange-400">announcement</span>{' '}
+            (&ldquo;I will sign the World Cup result, here is my one-time nonce&rdquo;) and an{' '}
+            <span className="text-orange-400">attestation</span> (the signature on{' '}
+            <code className="text-orange-400">spain</code>)
+          </li>
+          <li>Never sees the contract, the parties, the addresses, or the amounts</li>
+          <li>
+            <span className="text-orange-400">Cannot steal funds</span> — it&apos;s a referee
+            shouting the score into the void
+          </li>
+        </ul>
+        <div className="bg-white rounded-lg p-2 max-w-3xl">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/oracle_creation.png" alt="Oracle creates an announcement committing to an attestation" className="w-full" />
+        </div>
+      </div>
     ),
     notes: [
       'The oracle is the part everyone worries about, so be precise here.',
@@ -165,6 +178,95 @@ offer.serialize().toString('hex');  // byte-identical round-trip`)}
       'The @node-dlc TypeScript library parses and produces them: paste any offer hex into DlcOffer.deserialize and you get a full object — collateral, payout table, funding inputs.',
       'That means what you build today interoperates: your counterparty could be running completely different software.',
       'The "Learn" page on the app has runnable snippets for this.',
+    ],
+  },
+  {
+    title: 'Inside the offer',
+    body: (
+      <div className="grid md:grid-cols-2 gap-8 items-center">
+        <div className="bg-white rounded-lg p-4 max-w-sm mx-auto">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/msg_offer.png" alt="DlcOffer message contents" className="w-full" />
+        </div>
+        <ul className="space-y-3 text-xl">
+          <li>💰 The offerer&apos;s <span className="text-orange-400">UTXOs + collateral</span></li>
+          <li>🔮 The <span className="text-orange-400">oracle announcement</span> it builds on</li>
+          <li>📋 The full <span className="text-orange-400">payout table</span>, every outcome</li>
+          <li>⏰ CET + <span className="text-orange-400">refund locktimes</span></li>
+        </ul>
+      </div>
+    ),
+    notes: [
+      'Point, don\'t read — ~20 seconds. This is everything inside a DlcOffer.',
+      'Key line: the offer contains everything the counterparty needs to audit the deal — coins, terms, payout table, escape hatch. And nothing is signed yet.',
+      'In the demo, every hex box has a "decode this message" toggle — you will see these exact fields as JSON.',
+    ],
+  },
+  {
+    title: 'Inside the accept',
+    body: (
+      <div className="grid md:grid-cols-2 gap-8 items-center">
+        <div className="bg-white rounded-lg p-4 max-w-sm mx-auto">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/msg_accept.png" alt="DlcAccept message contents" className="w-full" />
+        </div>
+        <ul className="space-y-3 text-xl">
+          <li>💰 The accepter&apos;s <span className="text-orange-400">UTXOs</span></li>
+          <li>
+            🔐 One <span className="text-orange-400">adaptor signature per outcome</span> — the
+            encrypted pre-signatures
+          </li>
+          <li>🕰️ A <span className="text-orange-400">refund signature</span></li>
+        </ul>
+      </div>
+    ),
+    notes: [
+      '~20 seconds. The accept is the big message — kilobytes, because it carries the encrypted signatures.',
+      'By sending this, the accepter has already signed every possible ending of the contract. They cannot later refuse to settle.',
+      'The refund signature comes along too, so the escape hatch exists before any money moves.',
+    ],
+  },
+  {
+    title: 'Inside the sign',
+    body: (
+      <div className="grid md:grid-cols-2 gap-8 items-center">
+        <div className="bg-white rounded-lg p-4 max-w-sm mx-auto">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/msg_sign.png" alt="DlcSign message contents" className="w-full" />
+        </div>
+        <ul className="space-y-3 text-xl">
+          <li>
+            🔐 The offerer&apos;s <span className="text-orange-400">adaptor signatures</span> — now
+            both sides have pre-signed everything
+          </li>
+          <li>✍️ <span className="text-orange-400">Funding signatures</span> for the offerer&apos;s inputs</li>
+          <li>🕰️ The offerer&apos;s <span className="text-orange-400">refund signature</span></li>
+        </ul>
+      </div>
+    ),
+    notes: [
+      '~20 seconds. The sign message mirrors the accept — the offerer verifies the accepter\'s adaptor sigs first, then adds their own, plus real signatures on their funding inputs.',
+      'After this message, the accepter holds everything needed to assemble and broadcast the funding transaction.',
+    ],
+  },
+  {
+    title: 'The negotiation',
+    body: (
+      <div className="space-y-4">
+        <div className="bg-white rounded-lg p-3 max-w-2xl mx-auto">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/msg_flow.png" alt="Offer, accept, sign message flow between the parties" className="w-full" />
+        </div>
+        <p className="text-xl text-zinc-400 text-center">
+          offer → accept → sign — all off-chain. Then, and only then, the accepter broadcasts.
+        </p>
+      </div>
+    ),
+    notes: [
+      'The whole negotiation is three messages, entirely off-chain — in the demo they travel by copy-paste; in production, over the network.',
+      'Until the funding transaction broadcasts, nothing is at risk: either side can walk away and no money ever moved.',
+      'If someone asks about the "free option" — yes, between sign and broadcast the accepter briefly holds an option to fund or not. Mitigation: the offerer can double-spend their inputs if the accepter never broadcasts.',
+      'Next: how you verify all of this without trusting anyone\'s software.',
     ],
   },
   {
