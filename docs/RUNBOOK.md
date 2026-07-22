@@ -73,7 +73,7 @@ Common per-step failures → see troubleshooting table below.
 
 ## 0:33–0:40 — Lending demo
 
-Switch your three tabs to `?demo=loan` (links on the home page) and **drive it yourself on the projector** — at 7 minutes this is presenter-led; attendees watch (or follow along if they kept pace, and can run it themselves after from [tutorial-lending.md](tutorial-lending.md)). Same mechanics as the bet, so move fast — the value here is the narrative:
+Switch your three tabs to the loan demo (the **⚽ Bet | 🏦 Loan switcher in the top nav** — the nav keeps the demo when hopping between tabs) and **drive it yourself on the projector** — at 7 minutes this is presenter-led; attendees watch (or follow along if they kept pace, and can run it themselves after from [tutorial-lending.md](tutorial-lending.md)). Same mechanics as the bet, so move fast — the value here is the narrative:
 
 - "Same machine, different payout table. Four outcomes is all a loan needs." Show the four outcomes on the offerer page.
 - "This is not a demo version of Lygos — this *is* the Lygos contract." Mention: numeric curves = 1000+ sigs and 2 minutes; this = 4 sigs and 5 seconds; that's why it works on hardware wallets.

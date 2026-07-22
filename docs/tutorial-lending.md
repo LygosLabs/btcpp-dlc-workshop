@@ -23,6 +23,8 @@ Four outcomes → four adaptor signatures → ~5 seconds to set up, and a borrow
 | 🅐 Offerer | `/offerer?demo=loan` | the **borrower** — posts 100,000 sats of BTC collateral |
 | 🅑 Accepter | `/accepter?demo=loan` | the **lender** — posts a 10,000 sat stake (stands in for the fiat/stablecoin loan, which happens off-chain) |
 
+Easiest way to get there: click the **🏦 Loan** toggle in the top nav on each tab — the nav keeps you in the loan demo from then on.
+
 ## The flow
 
 Mechanically it's the same 8 steps as the betting demo — fund both wallets, announce, offer, accept, sign, finalize, attest, execute. Follow the steps on each page in order. The differences worth noticing:
